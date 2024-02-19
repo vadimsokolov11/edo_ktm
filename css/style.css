@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  background-image: url("../img/kuzbasstransmet.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* фиксирует картинку на месте */
+  background-attachment: fixed; 
+  font-family: 'Montserrat', sans-serif;
+ 
+}
+/* на селект */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стиль на ккарточки на вкладку продукция */
+.card-color{
+  background-color: #86b7fe;
+  height: 15rem;
+}
+.card-text{
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.card-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.card-mini{
+  width: 150px;
+  height: 50px;
+  background-color: #8efe86;
+  border-radius: 20px;
+}
+

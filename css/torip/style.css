@@ -1,0 +1,296 @@
+/* на карточки */
+
+.card-transparency{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.accordion {
+    --bs-accordion-color: var(--bs-body-color);
+    /* фон всего аккардеона */
+    /* --bs-accordion-bg: var(--bs-body-bg); */
+    --bs-accordion-bg: rgba(207, 207, 207, 0.3);
+    /* фон всего аккардеона */
+    --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+    --bs-accordion-border-color: var(--bs-border-color);
+    --bs-accordion-border-width: var(--bs-border-width);
+    --bs-accordion-border-radius: var(--bs-border-radius);
+    --bs-accordion-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
+    --bs-accordion-btn-padding-x: 10px;
+    /* размер элемента аккардиона в высоту */
+    --bs-accordion-btn-padding-y: 5px;
+    --bs-accordion-btn-color: var(--bs-body-color);
+    /* фон кнопки аккардеона */
+    /* --bs-accordion-btn-bg: var(--bs-accordion-bg); */
+  
+    /* --bs-accordion-btn-bg: rgba(16, 148, 209, 0.3); */
+     /* фон кнопки аккардеона */
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-icon-width: 1.25rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23052c65'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-focus-border-color: #86b7fe;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-accordion-body-padding-x: 1.2rem;
+    --bs-accordion-body-padding-y: 5px;
+    --bs-accordion-active-color: var(--bs-primary-text-emphasis);
+    /* цвет при нажатии на кнопку раскрытия */
+    /* --bs-accordion-active-bg: var(--bs-primary-bg-subtle); */
+  }
+  
+  .accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--bs-accordion-btn-padding-y);
+    /* поправки: отступ слева 0, отступ справа 10 пикселей */
+    padding-left: 0;
+    padding-right: 10px;
+    /* поправки: отступ слева 0, отступ справа 10 пикселей */
+    font-size: 1rem;
+    color: var(--bs-accordion-btn-color);
+    text-align: left;
+    background-color: var(--bs-accordion-btn-bg);
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: var(--bs-accordion-transition);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .accordion-button {
+      transition: none;
+    }
+  }
+  .accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-color: var(--bs-accordion-active-bg);
+    box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+  }
+  .accordion-button:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: var(--bs-accordion-btn-icon-transform);
+  }
+  .accordion-button::after {
+    /* flex-shrink: 0; */
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .accordion-button::after {
+      transition: none;
+    }
+  }
+  .accordion-button:hover {
+    z-index: 2;
+  }
+  .accordion-button:focus {
+    z-index: 3;
+    border-color: var(--bs-accordion-btn-focus-border-color);
+    outline: 0;
+    box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+  }
+  
+  /* отступы между разделами */
+  .accordion-header {
+    margin-bottom: 3px;
+    /* display: flex;
+    align-items: center;
+    justify-content: flex-start; */
+  }
+  
+  .accordion-item {
+    color: var(--bs-accordion-color);
+    background-color: var(--bs-accordion-bg);
+    border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+  }
+  .accordion-item:first-of-type {
+    border-top-left-radius: var(--bs-accordion-border-radius);
+    border-top-right-radius: var(--bs-accordion-border-radius);
+  }
+  .accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: var(--bs-accordion-inner-border-radius);
+    border-top-right-radius: var(--bs-accordion-inner-border-radius);
+  }
+  .accordion-item:not(:first-of-type) {
+    border-top: 0;
+  }
+  .accordion-item:last-of-type {
+    border-bottom-right-radius: var(--bs-accordion-border-radius);
+    border-bottom-left-radius: var(--bs-accordion-border-radius);
+  }
+  .accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-right-radius: var(--bs-accordion-inner-border-radius);
+    border-bottom-left-radius: var(--bs-accordion-inner-border-radius);
+  }
+  .accordion-item:last-of-type .accordion-collapse {
+    border-bottom-right-radius: var(--bs-accordion-border-radius);
+    border-bottom-left-radius: var(--bs-accordion-border-radius);
+  }
+  
+  .accordion-body {
+    padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
+  }
+  
+  .accordion-flush .accordion-collapse {
+    border-width: 0;
+  }
+  .accordion-flush .accordion-item {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+  .accordion-flush .accordion-item:first-child {
+    border-top: 0;
+  }
+  .accordion-flush .accordion-item:last-child {
+    border-bottom: 0;
+  }
+  .accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {
+    border-radius: 0;
+  }
+  
+  [data-bs-theme=dark] .accordion-button::after {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236ea8fe'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236ea8fe'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  }
+
+  /* для кнопки аккардеона цвета */
+/* формирование заготовок */
+.color-accordion-forming{
+    --bs-accordion-btn-bg: rgba(255,207,72, 0.2);
+    --bs-accordion-active-bg: rgba(255,207,72, 0.2);
+  }
+  /* прокатка */
+  .color-accordion-rolling{
+    --bs-accordion-btn-bg: rgba(0, 255, 26, 0.2);
+    --bs-accordion-active-bg: rgba(0, 255, 26, 0.2);
+  }
+  /* горячяя объемная заготовка */
+  .color-accordion-basic{
+    --bs-accordion-btn-bg: rgba(71, 184, 236, 0.2);
+    --bs-accordion-active-bg: rgba(71, 184, 236, 0.2);
+  }
+  /* костыльные аппараты */
+  .color-accordion-crutch{
+    --bs-accordion-btn-bg: rgba(0, 255, 26, 0.2);
+    --bs-accordion-active-bg: rgba(0, 255, 26, 0.2);
+  }
+  /* мелкосерийное производство */
+  .color-accordion-small-production{
+    --bs-accordion-btn-bg: rgba(131, 150, 235, 0.2);
+    --bs-accordion-active-bg: rgba(131,150,235, 0.2);
+  }
+  /* вспомогательыне операции */
+  .color-accordion-equipment{
+    --bs-accordion-btn-bg: rgba(94, 83, 218, 0.2);
+    --bs-accordion-active-bg: rgba(94, 83, 218, 0.2);
+  }
+
+
+  /* содержимое аккардеонов */
+.st-title{
+    font-size: 14px;
+    font-style: italic;
+    margin: 0px;
+  }
+  .st-time{
+    font-size:14px;
+    font-weight: 800;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0px;
+  }
+  .st-procent{
+    font-size:14px;
+    font-weight: 800;
+    padding-left: 4px;
+    padding-right: 4px;
+    width: 50px;
+    text-align: center;
+  }
+  .st-cycle{
+    font-size:14px;
+    font-weight: 600;
+    color: #0603bb;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-right: 4px;
+    margin-left: 8px
+  }
+  .st-cycle-sec{
+    font-size:14px;
+    font-weight: 600;
+    color: #0603bb;
+    padding-left: 0px;
+  }
+  .st-blanks{
+    font-size:14px;
+    font-weight: 600;
+    color: #0603bb;
+    padding-left: 8px;
+    padding-right: 4px;
+    margin-right: 4px
+  }
+  .st-cycle-sht{
+    font-size:14px;
+    font-weight: 600;
+    color: #0603bb;
+    padding-left: 0px;
+  }
+  .st-rejected{
+    font-size:14px;
+    font-weight: 600;
+    color: #0603bb;
+    padding-left: 8px;
+    padding-right: 4px;
+    margin-right: 4px;
+  }
+  .st-rejected-sht{
+    font-size:14px;
+    font-weight: 600;
+    color: #0603bb;
+    padding-left: 0px;
+    padding-right: 10px;
+  }
+
+  /* заголовки аккардеонов */
+.sub-title-name{
+  font-size:15px;
+  padding: 0;
+  font-weight: 700;
+  font-style: italic;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.sub-title-details{
+  padding-left: 8px;
+  color:#0603bb; 
+  font-size:14px;
+  font-weight: bold;
+  display: inline;
+  font-weight: 800;
+  font-style: italic;
+  margin: 0px;
+}
+.sub-title-sht{
+  color:#0603bb; 
+  font-size:14px;
+  font-weight: 800;
+  padding-left: 0px;
+  padding-right: 10px;
+  font-style: italic;
+}
+.sub-title-time{
+  font-size:14px;
+  font-weight: 800;
+  font-style: italic;
+
+}
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ошибка 404 - Страница не найдена</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ошибка 404 - Страница не найдена</h1>
+        <p>К сожалению, запрашиваемая вами страница не найдена.</p>
+        <p>Пожалуйста, проверьте правильность введенного адреса или перейдите на <a href="/<?= APP_BASE_PATH ?>/main">главную страницу</a>.</p>
+    </div>
+</body>
+</html>
