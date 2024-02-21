@@ -39,6 +39,7 @@ class ListPlanController{
             echo "Page not found";
             return;
         }
+       // tte($plan);
 
         include 'app/views/product/list_plan/show.php';
     }
@@ -65,23 +66,37 @@ class ListPlanController{
     public function store(){
         $this->check->requirePermission();
 
-        if (isset($_POST["name"]) && isset($_POST["age"]) && isset($_POST["email"]) && isset($_POST["detail"])) {
-            $name = $_POST["name"];
-            $age = $_POST["age"];
-            $email = $_POST["email"];
+        if (isset($_POST["total_plan_month_van"]) && isset($_POST["total_plan_month_delail"]) && isset($_POST["total_plan_month_tn"]) && isset($_POST["total_required_num_hours_ton"]) && isset($_POST["detail"]) && isset($_POST["plan_month_tn"]) && isset($_POST["plan_mont_van"]) && isset($_POST["plan_detail"]) 
+        && isset($_POST["result_plan_tn"]) && isset($_POST["result_plan_van"]) && isset($_POST["required_num_hours_ton"])) {
+            
+            $total_plan_month_van = $_POST["total_plan_month_van"];
+            $total_plan_month_delail = $_POST["total_plan_month_delail"];
+            $total_plan_month_tn = $_POST["total_plan_month_tn"];
+            $total_required_num_hours_ton = $_POST["total_required_num_hours_ton"];
+            
             $detail = $_POST["detail"];
-            if (!empty($name) && !empty($age) && !empty($email) && !empty($detail)) {
+            $plan_month_tn = $_POST["plan_month_tn"];
+            $plan_mont_van = $_POST["plan_mont_van"];
+            $plan_detail = $_POST["plan_detail"];
+            $result_plan_tn = $_POST["result_plan_tn"];
+            $result_plan_van = $_POST["result_plan_van"];
+            $required_num_hours_ton = $_POST["required_num_hours_ton"];
+            
+            if (!empty($total_plan_month_van) && !empty($total_plan_month_delail) && !empty($total_plan_month_tn) && !empty($total_required_num_hours_ton) && !empty($detail) && !empty($plan_month_tn) && !empty($plan_mont_van) && !empty($plan_detail) && 
+            !empty($result_plan_tn) && !empty($result_plan_van) && !empty($required_num_hours_ton)) {
 
                 $data_to_add = array(
                     "detail" => $detail,
-                    "name" => $name,
-                    "age" => $age,
-                    "email" => $email,
-                    
-                
+                    "plan_mont_van" => $plan_mont_van,
+                    "plan_month_tn" => $plan_month_tn,
+                    "plan_detail" => $plan_detail,
+                    "result_plan_tn" => $result_plan_tn,
+                    "result_plan_van" => $result_plan_van,
+                    "required_num_hours_ton" => $required_num_hours_ton,
                 );
             $plansModel = new ListPlanModel();
-            $plansModel->createPlan($data_to_add);
+            $plansModel->createPlan($data_to_add, $total_plan_month_van, $total_plan_month_delail, $total_plan_month_tn, $total_required_num_hours_ton);
+         //  tte( $plansModel);
 
         }
 

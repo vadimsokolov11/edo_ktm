@@ -21,9 +21,9 @@ ob_start();
             </thead>
             <tbody style="background-color: bisque;">
                 <tr>
-                    <td><?= $item['name'] ?></td>
+                    <td><?= $item['plan_month_tn'] ?></td>
                     <td>кг</td>
-                    <td><?= $item['surname'] ?></td>
+                    <td><?= $item['plan_mont_van'] ?></td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
@@ -31,8 +31,8 @@ ob_start();
                 <tr>
                     <td>План на месяц</td>
                     <td>тн</td>
-                    <td><?= $item['patronymic'] ?></td>
-                    <td><?= $item['birthyear'] ?></td>
+                    <td><?= $item['result_plan_tn'] ?></td>
+                    <td><?= $item['result_plan_van'] ?></td>
                     <td>720,0</td>
                 </tr>
                 <tr>

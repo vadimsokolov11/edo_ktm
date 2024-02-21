@@ -110,9 +110,10 @@ class ListPlanModel{
     }
 
 
-    public function createPlan($data) {
+    public function createPlan($data, $total_plan_month_van, $total_plan_month_delail, $total_plan_month_tn, $total_required_num_hours_ton) {
         $json_data = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
-        $query = "INSERT INTO plan_month (plan_info, agreed, ratify, date) VALUES (:plan_info, :agreed, :ratify, :date)";
+        $query = "INSERT INTO plan_month (plan_info, agreed, ratify, date, total_plan_month_van, total_plan_month_delail, total_plan_month_tn, total_required_num_hours_ton) 
+        VALUES (:plan_info, :agreed, :ratify, :date, :total_plan_month_van, :total_plan_month_delail, :total_plan_month_tn, :total_required_num_hours_ton)";
     
         try {
             $stmt = $this->db->prepare($query);
@@ -120,6 +121,10 @@ class ListPlanModel{
             $stmt->bindParam(":agreed", $_POST["agreed"]);
             $stmt->bindParam(":ratify", $_POST["ratify"]);
             $stmt->bindParam(":date", $_POST["date"]);
+            $stmt->bindParam(":total_plan_month_van", $_POST["total_plan_month_van"]);
+            $stmt->bindParam(":total_plan_month_delail", $_POST["total_plan_month_delail"]);
+            $stmt->bindParam(":total_plan_month_tn", $_POST["total_plan_month_tn"]);
+            $stmt->bindParam(":total_required_num_hours_ton", $_POST["total_required_num_hours_ton"]);
             $stmt->execute();
     
             return $this->db->lastInsertId(); // Возвращаем ID только если запрос выполнен успешно
