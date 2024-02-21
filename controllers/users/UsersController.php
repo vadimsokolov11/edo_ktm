@@ -70,8 +70,9 @@ class UsersController{
     
         $roleModel = new Role();
         $roles = $roleModel->getAllRoles();
-    
+       // tte( $user);
         include 'app/views/users/edit.php';
+        
     }
     
 

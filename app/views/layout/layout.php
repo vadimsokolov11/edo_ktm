@@ -128,6 +128,7 @@
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/<?= APP_BASE_PATH ?>/users">Пользователи</a></li>
                                 <li><a href="/<?= APP_BASE_PATH ?>/roles">Роли</a></li>
+                                <li><a href="/<?= APP_BASE_PATH ?>/positions">Должности</a></li>
                             </ul>
                         </li>
                         <li>

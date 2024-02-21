@@ -103,7 +103,7 @@ ob_start();
         <select class="form-control mb-2 detail" id="detail" name="detail[]" onchange="updateWeight(this)">
             <?php foreach ($details as $detail): ?>
                 <option
-                    value="<?php echo $detail['norm_of_hours']; ?> <?php echo $detail['weight']; ?> <?php echo $detail['title']; ?>">
+                    value="<?php echo $detail['weight']; ?> <?php echo $detail['norm_of_hours']; ?> <?php echo $detail['title']; ?>">
                     <?php echo $detail['title'] . ' ' . $detail['weight'] . ' кг'; ?>
                 </option>
             <?php endforeach; ?>
@@ -302,10 +302,10 @@ ob_start();
         var details = <?php echo json_encode($details); ?>;
         details.forEach(function (detail) {
             var option = document.createElement("option");
-            option.value = detail.weight;
+            option.value = detail.weight + ' ' + detail.norm_of_hours + ' ' + detail.title; // передаем данные через option(нужно что бы в базу записывалось все)
             option.setAttribute("data-weight", detail.weight);
 
-            var optionText = document.createTextNode(detail.title + ' ' + detail.weight + ' кг');
+            var optionText = document.createTextNode(detail.title + detail.weight + 'кг'); // вывод в селект составляющих
             option.appendChild(optionText);
 
             newSelect.appendChild(option);
