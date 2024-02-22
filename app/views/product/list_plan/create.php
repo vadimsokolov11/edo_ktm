@@ -7,26 +7,6 @@ ob_start();
 <h1 class="mb-4">
     <?= $title ?>
 </h1>
-
-<style>
-    .plan_month_tn,
-    .plan_mont_van,
-    .plan_detail,
-    .result_plan_tn,
-    .result_plan_van,
-    .required_num_hours_ton,
-    .total_plan_detail,
-    .total_plan_tn,
-    .total_plan_van {
-        width: 180px;
-        height: 35px;
-    }
-
-    .detail {
-        width: 367px;
-        height: 35px;
-    }
-</style>
 <form method="POST" action="/<?= APP_BASE_PATH ?>/product/list_plan/store" id="inputForm">
     <button type="submit" class="btn btn-primary" onclick="return confirm('Сохранить созданый план?')">Сохранить
         план</button>
@@ -35,8 +15,10 @@ ob_start();
         <!-- селект на выбор человека, который согласовал план -->
         <div class="col-md-2 mb-3">
             <label for="agreed" class="form-label">Согласовал</label>
-            <select class="form-control" id="agreed" name="agreed">
+            <select class="form-control users" id="agreed" name="agreed" onchange="selectUsers(this)">
+                <option value="">Выберите пользователя</option>
                 <?php foreach ($users as $user): ?>
+
                     <option value="<?php echo $user['id']; ?>">
                         <?php echo $user['surname']; ?>
                         <?php echo $user['name']; ?>
@@ -49,7 +31,8 @@ ob_start();
         <!-- селект на выбор человека, который утвердил план -->
         <div class="col-md-2 mb-3">
             <label for="ratify" class="form-label">Утвердил</label>
-            <select class="form-control" id="ratify" name="ratify">
+            <select class="form-control users" id="ratify" name="ratify" onchange="selectUsers(this)">
+                <option value="">Выберите пользователя</option>
                 <?php foreach ($users as $user): ?>
                     <option value="<?php echo $user['id']; ?>">
                         <?php echo $user['surname']; ?>
@@ -101,6 +84,7 @@ ob_start();
     <!-- селект на выбор детали -->
     <div class="row col-md-4 mb-2">
         <select class="form-control mb-2 detail" id="detail" name="detail[]" onchange="updateWeight(this)">
+            <option value="">Выберите позицию</option>
             <?php foreach ($details as $detail): ?>
                 <option
                     value="<?php echo $detail['weight']; ?> <?php echo $detail['norm_of_hours']; ?> <?php echo $detail['title']; ?>">
@@ -108,10 +92,10 @@ ob_start();
                 </option>
             <?php endforeach; ?>
         </select>
-
+        
         <!-- input на ввод месячного плана производства в тоннах -->
         <input type="text" class="plan_month_tn form-control mb-2 mr-2" id="plan_month_tn" name="plan_month_tn[]"
-            placeholder="Введите месячный план в тоннах" oninput="calculateAndDisplay(this)" required>
+            placeholder="Введите месячный план в тоннах" oninput="calculateAndDisplay(this)" required >
 
         <input type="text" class="form-control plan_mont_van mb-2 mr-2" id="plan_mont_van" name="plan_mont_van[]"
             placeholder="Вагонов за месяц" readonly>
@@ -129,7 +113,6 @@ ob_start();
 
 
 <script>
-
     // Прокрутка кнопки при создании элементов
     window.addEventListener("scroll", function () {
         var button = document.querySelector(".btn.btn-primary.mb-2");
@@ -150,51 +133,7 @@ ob_start();
             }
         }
     });
-
-    function calculateAndDisplay(inputElement) {
-        calculateTotalVanMonth();
-        calculateTotalTnMonth();
-        calculateTotalDetailMonth();
-        calculateTotalNumHoursMonth();
-        var parentDiv = inputElement.parentElement;
-        var plan_month_tn = parseFloat(parentDiv.querySelector(".plan_month_tn").value); // ввод месячного плана в тоннах
-        var weight = parseFloat(parentDiv.querySelector(".detail").value); // ввод массы детали
-        var normOfHours = parseFloat(document.querySelector(".detail").value.split(" ")[1]);
-
-        var selectedRole = parentDiv.querySelector(".detail").value; // селект на детали 
-
-        var plan_mont_van = plan_month_tn / 65; // расчет плана в вагонах
-        if (isNaN(plan_mont_van)) {
-            plan_mont_van = 0;
-        }
-        parentDiv.querySelector(".plan_mont_van").value = plan_mont_van.toFixed(2);
-
-        var plan_detail = plan_month_tn * 1000 / weight; // расчет количества деталей в штуках
-        if (isNaN(plan_detail)) {
-            plan_detail = 0;
-        }
-        parentDiv.querySelector(".plan_detail").value = plan_detail.toFixed(2);
-
-        var result_plan_tn = plan_month_tn; // расчет общего кол-ва тонн на месяц
-        if (isNaN(result_plan_tn)) {
-            result_plan_tn = 0;
-        }
-        parentDiv.querySelector(".result_plan_tn").value = result_plan_tn.toFixed(2);
-
-        var result_plan_van = plan_mont_van; // расчет общего кол-ва вагонов на месяц
-        if (isNaN(result_plan_van)) {
-            result_plan_van = 0;
-        }
-        parentDiv.querySelector(".result_plan_van").value = result_plan_van.toFixed(2);
-
-        var required_num_hours_ton = normOfHours * plan_month_tn; // расчет общего кол-ва вагонов на месяц
-        if (isNaN(required_num_hours_ton)) {
-            required_num_hours_ton = 0;
-        }
-        parentDiv.querySelector(".required_num_hours_ton").value = required_num_hours_ton.toFixed(2);
-
-    }
-
+    // Функция добавления элементов
     function addElements() {
 
         // Кнопка удаления
@@ -299,6 +238,13 @@ ob_start();
             updateWeight(this);
         };
 
+        // Дефолтный option со значанием "Выберите позицию" при генерации select
+        var defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.text = "Выберите позицию";
+        newSelect.add(defaultOption);
+
+        // Вывод данных из базы из json массива
         var details = <?php echo json_encode($details); ?>;
         details.forEach(function (detail) {
             var option = document.createElement("option");
@@ -322,85 +268,6 @@ ob_start();
         newDiv.appendChild(deleteButton);
 
         form.appendChild(newDiv); // выводим элементы в форму
-    }
-
-    // функция для передачи атрибута weight из селекта
-    // function updateWeight(selectElement) {
-    //     var selectedOption = selectElement.options[selectElement.selectedIndex];
-    //     var normOfHours = selectedOption.getAttribute("title");
-    //     var inputElement = document.getElementById("norm_of_hours");
-    //     inputElement.value = normOfHours;
-    // }
-
-
-    // Расчет общей суммы вагонов по плану за месяц
-    function calculateTotalVanMonth() {
-        var inputs = document.getElementsByClassName("plan_month_tn");
-        var total_plan_month_van = 0;
-
-        for (var i = 0; i < inputs.length; i++) {
-            var value = parseFloat(inputs[i].value);
-            if (!isNaN(value)) {
-                total_plan_month_van += value;
-            }
-        }
-
-        total_plan_month_van = (total_plan_month_van / 65).toFixed(2);
-        document.getElementById("total_plan_month_van").value = total_plan_month_van;
-    }
-
-
-    // Расчет общей суммы тонн по плану за месяц
-    function calculateTotalTnMonth() {
-        var inputs = document.getElementsByClassName("plan_month_tn");
-        var total_plan_month_tn = 0;
-
-        for (var i = 0; i < inputs.length; i++) {
-            var value = parseFloat(inputs[i].value);
-            if (!isNaN(value)) {
-                total_plan_month_tn += value;
-            }
-        }
-
-        total_plan_month_tn = (total_plan_month_tn).toFixed(2);
-        document.getElementById("total_plan_month_tn").value = total_plan_month_tn;
-    }
-
-    // Расчет общей суммы деталей по плану за месяц
-    function calculateTotalDetailMonth() {
-        var weight = parseFloat(document.querySelector(".detail").value);
-        var inputs = document.getElementsByClassName("plan_month_tn");
-        var total_plan_month_delail = 0;
-
-        for (var i = 0; i < inputs.length; i++) {
-            var value = parseFloat(inputs[i].value);
-            if (!isNaN(value)) {
-                total_plan_month_delail += value;
-            }
-        }
-
-        total_plan_month_delail = (total_plan_month_delail * 1000 / weight).toFixed(2);
-        document.getElementById("total_plan_month_delail").value = total_plan_month_delail;
-
-    }
-
-
-    // Расчет общего количества челокеко-часов на тонну по плану за месяц
-    function calculateTotalNumHoursMonth() {
-        var normOfHours = parseFloat(document.querySelector(".detail").value.split(" ")[1]);
-        var inputs = document.getElementsByClassName("plan_month_tn");
-        var total_required_num_hours_ton = 0;
-
-        for (var i = 0; i < inputs.length; i++) {
-            var value = parseFloat(inputs[i].value);
-            if (!isNaN(value)) {
-                total_required_num_hours_ton += value;
-            }
-        }
-
-        total_required_num_hours_ton = (total_required_num_hours_ton * normOfHours).toFixed(2);
-        document.getElementById("total_required_num_hours_ton").value = total_required_num_hours_ton;
-
     }
 </script>
 

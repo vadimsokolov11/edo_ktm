@@ -55,7 +55,7 @@ class Router {
 
         if (!$controller) {
             http_response_code(404);
-            include_once 'app/views/errors/404.html';
+            include_once 'templates/errors/404.html';
             return;
         }
 

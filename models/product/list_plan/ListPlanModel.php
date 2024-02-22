@@ -80,7 +80,7 @@ class ListPlanModel
         }
     }
 
-    // Метод для вывода всех данных о продукции
+    // Метод для вывода всех данных о продукции из таблицы spravka_product
     public function getAllDetail()
     {
         try {
@@ -121,6 +121,7 @@ class ListPlanModel
         }
     }
 
+    // Метод на вывод всей таблицы месячного плана по id
     public function getPlanInfoWhollyById($id)
     {
         $query = "SELECT * FROM `plan_month` WHERE id = ?";
@@ -204,7 +205,7 @@ class ListPlanModel
             $stmt->bindParam(":total_plan_month_tn", $_POST["total_plan_month_tn"]);
             $stmt->bindParam(":total_required_num_hours_ton", $_POST["total_required_num_hours_ton"]);
             $stmt->execute();
-           // tte($json_data);
+
             return $this->db->lastInsertId(); // Возвращаем ID только если запрос выполнен успешно
         } catch (\PDOException $e) {
             // Обработка ошибок, например, запись в журнал или вывод сообщения об ошибке
@@ -215,8 +216,7 @@ class ListPlanModel
 
     }
 
-
-
+    // Метод на редактирование данных в таблице месячного плана по id 
     public function updatePlan($id, $data_to_add, $total_plan_month_van, $total_plan_month_delail, $total_plan_month_tn, $total_required_num_hours_ton)
     {
         $json_data = json_encode($data_to_add, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
@@ -235,7 +235,6 @@ class ListPlanModel
             $stmt->bindParam(":id", $id);
             $stmt->execute();
 
-           // tte($json_data);
             return true; // Возвращаем true, если запрос выполнен успешно
         } catch (\PDOException $e) {
             // Обработка ошибок, например, запись в журнал или вывод сообщения об ошибке
@@ -243,19 +242,4 @@ class ListPlanModel
             return false;
         }
     }
-
-    public function deletePage($id)
-    {
-        $query = "DELETE FROM pages WHERE id = ?";
-
-        try {
-            $stmt = $this->db->prepare($query);
-            $stmt->execute([$id]);
-            return true;
-        } catch (\PDOException $e) {
-            return false;
-        }
-    }
-
-
 }

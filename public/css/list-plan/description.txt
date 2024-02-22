@@ -1,0 +1,4 @@
+Стили для страницы list-plan
+
+Расположение:
+Папка app/viewvs/product/list_plan/create(edit)

@@ -1,0 +1,4 @@
+Содержит функции для проверки ввода одинаковых данных в select
+
+Расположение:
+Папка app/viewvs/product/list_plan/create(edit)

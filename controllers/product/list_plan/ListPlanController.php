@@ -157,7 +157,7 @@ class ListPlanController
         }
         
         //var_dump($info);
-    //  tte($plan);
+     // tte($plan);
         include 'app/views/product/list_plan/edit.php';
     }
 

@@ -23,6 +23,8 @@
     <link href="/edo_kuzbasstransmet/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/edo_kuzbasstransmet/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- Public css -->
+    <link  rel="stylesheet" href="/edo_kuzbasstransmet/public/css/list-plan/list-plan.css"/>
 </head>
 
 <body>
@@ -188,6 +190,11 @@
     <script src="/edo_kuzbasstransmet/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
     <!-- App js -->
     <script src="/edo_kuzbasstransmet/assets/js/theme.js"></script>
+
+    <!-- Public js -->
+    <script src="/edo_kuzbasstransmet/public/js/check-select/check-select.js"></script>
+    <script src="/edo_kuzbasstransmet/public/js/calculate-list-plan/calculate-list-plan.js"></script>
+    <!-- <script src="/edo_kuzbasstransmet/public/js/validation/validation.js"></script> -->
 
 </body>
 
